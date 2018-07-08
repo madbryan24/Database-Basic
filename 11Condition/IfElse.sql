@@ -1,0 +1,30 @@
+﻿USE SimpleQuery
+GO
+
+DECLARE @LuongTB INT 
+DECLARE @SLGV INT
+
+SELECT @SLGV = COUNT(*) 
+FROM dbo.GIAOVIEN
+
+SELECT @LuongTB = SUM(luong)/@SLGV
+FROM dbo.GIAOVIEN
+
+PRINT @LuongTB
+
+DECLARE @maGV CHAR(10) = '002'
+DECLARE @luongGV INT 
+
+SELECT @luongGV = dbo.GIAOVIEN.LUONG
+FROM dbo.GIAOVIEN
+WHERE MAGV = @maGV
+
+PRINT @luongGV
+IF(@luongGV > @LuongTB)
+	BEGIN
+		PRINT N'Lớn hơn'
+	END 
+ELSE 
+	BEGIN	
+		PRINT N'Nhỏ hơn'
+	END 

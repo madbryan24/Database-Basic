@@ -1,0 +1,41 @@
+﻿USE SimpleQuery
+GO
+
+-- lấy từ nhiều bảng có điều kiện
+SELECT GV.MAGV, GV.HOTEN, NT.TEN
+FROM dbo.GIAOVIEN AS GV, dbo.NGUOITHAN AS NT 
+WHERE GV.MAGV = NT.MAGV
+
+-- lương > 2000
+SELECT GV.MAGV, GV.HOTEN, GV.LUONG 
+FROM dbo.GIAOVIEN AS GV
+WHERE GV.LUONG > 2000
+
+- lấy giáo viên có lương lớn hơn 2000 và là nữ
+SELECT GV.MAGV, GV.HOTEN, GV.LUONG 
+FROM dbo.GIAOVIEN AS GV
+WHERE GV.LUONG > 2000 AND GV.PHAI = N'Nữ'
+
+-- lấy GV lớn hơn 40 tuổi
+SELECT GV.MAGV, GV.HOTEN, GV.NGSINH
+FROM dbo.GIAOVIEN AS GV
+WHERE YEAR(GETDATE()) - YEAR(GV.NGSINH) > 40
+
+-- hiện thị 1 cột mới 
+SELECT GV.MAGV, GV.HOTEN, GV.NGSINH, YEAR(GETDATE()) - YEAR(GV.NGSINH) AS N'Tuổi'
+FROM dbo.GIAOVIEN AS GV
+WHERE YEAR(GETDATE()) - YEAR(GV.NGSINH) > 40
+
+-- lấy ra trưởng bộ môn
+SELECT GV.* 
+FROM dbo.GIAOVIEN AS GV, dbo.BOMON AS BM
+WHERE GV.MAGV = BM.TRUONGBM
+
+-- đếm số giáo viên
+SELECT COUNT(*) AS N'Số lượng giáo viên'
+FROM dbo.GIAOVIEN
+
+-- đếm số người thân giáo viên
+SELECT COUNT(dbo.NGUOITHAN.MAGV) AS N'Số lượng người thân'
+FROM dbo.GIAOVIEN, dbo.NGUOITHAN
+WHERE dbo.GIAOVIEN.MAGV = '007' AND dbo.GIAOVIEN.MAGV = dbo.NGUOITHAN.MAGV

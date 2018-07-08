@@ -1,0 +1,7 @@
+-- int: so nguyen
+-- char: cap phat bo nho tinh
+-- varchar: cap phat bo nho dong
+-- nchar,nvarchar: viet dk ky tu unicode
+-- date: ngay thang nam gio
+-- time: gio phut giay
+-- tex,ntext: viet van ban
